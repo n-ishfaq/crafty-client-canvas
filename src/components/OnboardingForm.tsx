@@ -17,7 +17,9 @@ interface FormData {
   preferredContactMethod: string;
   address: string;
   facebook: string;
+  facebookPassword: string;
   instagram: string;
+  instagramPassword: string;
   gmail: string;
   gmailPassword: string;
   mainContactName: string;
@@ -25,8 +27,16 @@ interface FormData {
   contactPhone: string;
   contactEmail: string;
   logo: File | null;
-  appointmentsCalendars: string;
-  domainEmailCredentials: string;
+  calendarEmail: string;
+  calendarPassword: string;
+  domainProvider: string;
+  domainUsername: string;
+  domainPassword: string;
+  emailProvider: string;
+  crmPlatform: string;
+  crmLoginUrl: string;
+  crmUsername: string;
+  crmPassword: string;
   billingContactName: string;
   
   // Page 2 - Business Insights
@@ -55,7 +65,9 @@ const OnboardingForm = () => {
     preferredContactMethod: '',
     address: '',
     facebook: '',
+    facebookPassword: '',
     instagram: '',
+    instagramPassword: '',
     gmail: '',
     gmailPassword: '',
     mainContactName: '',
@@ -63,8 +75,16 @@ const OnboardingForm = () => {
     contactPhone: '',
     contactEmail: '',
     logo: null,
-    appointmentsCalendars: '',
-    domainEmailCredentials: '',
+    calendarEmail: '',
+    calendarPassword: '',
+    domainProvider: '',
+    domainUsername: '',
+    domainPassword: '',
+    emailProvider: '',
+    crmPlatform: '',
+    crmLoginUrl: '',
+    crmUsername: '',
+    crmPassword: '',
     billingContactName: '',
     mainService: '',
     benefits: '',
@@ -237,6 +257,18 @@ const OnboardingForm = () => {
                     </div>
 
                     <div className="space-y-2">
+                      <Label htmlFor="facebookPassword">Facebook Password</Label>
+                      <Input
+                        id="facebookPassword"
+                        type="password"
+                        value={formData.facebookPassword}
+                        onChange={(e) => handleInputChange('facebookPassword', e.target.value)}
+                        className="bg-input/50 border-border/50"
+                        placeholder="Facebook password"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
                       <Label htmlFor="instagram">Instagram</Label>
                       <Input
                         id="instagram"
@@ -244,6 +276,18 @@ const OnboardingForm = () => {
                         onChange={(e) => handleInputChange('instagram', e.target.value)}
                         className="bg-input/50 border-border/50"
                         placeholder="Instagram profile URL"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="instagramPassword">Instagram Password</Label>
+                      <Input
+                        id="instagramPassword"
+                        type="password"
+                        value={formData.instagramPassword}
+                        onChange={(e) => handleInputChange('instagramPassword', e.target.value)}
+                        className="bg-input/50 border-border/50"
+                        placeholder="Instagram password"
                       />
                     </div>
 
@@ -345,25 +389,134 @@ const OnboardingForm = () => {
                         />
                       </div>
 
-                      <div className="space-y-2 md:col-span-2">
-                        <Label htmlFor="appointmentsCalendars">Appointment and Calendars</Label>
-                        <Textarea
-                          id="appointmentsCalendars"
-                          value={formData.appointmentsCalendars}
-                          onChange={(e) => handleInputChange('appointmentsCalendars', e.target.value)}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-border/30 pt-6">
+                    <h3 className="text-lg font-semibold mb-4 text-primary">Appointment and Calendars</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="calendarEmail">Calendly/Google Calendar Email</Label>
+                        <Input
+                          id="calendarEmail"
+                          type="email"
+                          value={formData.calendarEmail}
+                          onChange={(e) => handleInputChange('calendarEmail', e.target.value)}
                           className="bg-input/50 border-border/50"
-                          placeholder="Tell us about your current appointment and calendar systems"
+                          placeholder="Calendar email address"
                         />
                       </div>
 
-                      <div className="space-y-2 md:col-span-2">
-                        <Label htmlFor="domainEmailCredentials">Domain & Email Provider Credentials</Label>
-                        <Textarea
-                          id="domainEmailCredentials"
-                          value={formData.domainEmailCredentials}
-                          onChange={(e) => handleInputChange('domainEmailCredentials', e.target.value)}
+                      <div className="space-y-2">
+                        <Label htmlFor="calendarPassword">Password</Label>
+                        <Input
+                          id="calendarPassword"
+                          type="password"
+                          value={formData.calendarPassword}
+                          onChange={(e) => handleInputChange('calendarPassword', e.target.value)}
                           className="bg-input/50 border-border/50"
-                          placeholder="Provide details about your domain and email provider"
+                          placeholder="Calendar password"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-border/30 pt-6">
+                    <h3 className="text-lg font-semibold mb-4 text-primary">Domain & Email Provider Credentials</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="domainProvider">Domain Provider</Label>
+                        <Input
+                          id="domainProvider"
+                          value={formData.domainProvider}
+                          onChange={(e) => handleInputChange('domainProvider', e.target.value)}
+                          className="bg-input/50 border-border/50"
+                          placeholder="Godaddy, NameCheap etc"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="domainUsername">Domain Login Username</Label>
+                        <Input
+                          id="domainUsername"
+                          value={formData.domainUsername}
+                          onChange={(e) => handleInputChange('domainUsername', e.target.value)}
+                          className="bg-input/50 border-border/50"
+                          placeholder="Domain login username"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="domainPassword">Domain Login Password</Label>
+                        <Input
+                          id="domainPassword"
+                          type="password"
+                          value={formData.domainPassword}
+                          onChange={(e) => handleInputChange('domainPassword', e.target.value)}
+                          className="bg-input/50 border-border/50"
+                          placeholder="Domain login password"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="emailProvider">Email Provider</Label>
+                        <Input
+                          id="emailProvider"
+                          value={formData.emailProvider}
+                          onChange={(e) => handleInputChange('emailProvider', e.target.value)}
+                          className="bg-input/50 border-border/50"
+                          placeholder="Gmail, Outlook etc."
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="crmPlatform">CRM Platform</Label>
+                        <Select onValueChange={(value) => handleInputChange('crmPlatform', value)}>
+                          <SelectTrigger className="bg-input/50 border-border/50">
+                            <SelectValue placeholder="Select CRM Platform" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="salesforce">Salesforce</SelectItem>
+                            <SelectItem value="hubspot">HubSpot</SelectItem>
+                            <SelectItem value="pipedrive">Pipedrive</SelectItem>
+                            <SelectItem value="zoho">Zoho CRM</SelectItem>
+                            <SelectItem value="monday">Monday.com</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="crmLoginUrl">CRM Login URL</Label>
+                        <Input
+                          id="crmLoginUrl"
+                          value={formData.crmLoginUrl}
+                          onChange={(e) => handleInputChange('crmLoginUrl', e.target.value)}
+                          className="bg-input/50 border-border/50"
+                          placeholder="CRM login URL"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="crmUsername">CRM Login Username</Label>
+                        <Input
+                          id="crmUsername"
+                          value={formData.crmUsername}
+                          onChange={(e) => handleInputChange('crmUsername', e.target.value)}
+                          className="bg-input/50 border-border/50"
+                          placeholder="CRM username"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="crmPassword">CRM Password</Label>
+                        <Input
+                          id="crmPassword"
+                          type="password"
+                          value={formData.crmPassword}
+                          onChange={(e) => handleInputChange('crmPassword', e.target.value)}
+                          className="bg-input/50 border-border/50"
+                          placeholder="CRM password"
                         />
                       </div>
                     </div>
