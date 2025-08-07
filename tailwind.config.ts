@@ -18,6 +18,13 @@ export default {
 			}
 		},
 		extend: {
+			backgroundImage: {
+				'gradient-purple-cyan': 'var(--gradient-purple-cyan)',
+				'gradient-dark': 'var(--gradient-dark)',
+			},
+			backdropBlur: {
+				'glass': 'var(--glass-backdrop)',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -52,6 +59,8 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				'purple-primary': 'hsl(var(--purple-primary))',
+				'cyan-secondary': 'hsl(var(--cyan-secondary))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
